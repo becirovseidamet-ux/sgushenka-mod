@@ -22,10 +22,15 @@ jobs:
 
       - name: Extract mod project
         run: |
-          rm -rf project
+          ZIP_FILE="$(find . -type f -iname '*sgushenka*source*.zip' -print -quit)"
+          if [ -z "$ZIP_FILE" ]; then
+            echo "ZIP-файл не найден в репозитории"
+            find . -maxdepth 4 -type f
+            exit 1
+          fi
           mkdir -p project
-          unzip -o sgushenka-forge-1.21.1-source.zip -d project
-          find project -maxdepth 3 -name build.gradle
+          unzip -o "$ZIP_FILE" -d project
+          find project -name build.gradle
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
