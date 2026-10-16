@@ -33,7 +33,6 @@ jobs:
           echo "Found archive: $ZIP_FILE"
           unzip "$ZIP_FILE" -d project
           find project -maxdepth 3 -name build.gradle -print
-        run: |
           mkdir project
           unzip sgushenka-forge-1.21.1-source.zip -d project
 
