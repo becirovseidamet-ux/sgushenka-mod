@@ -21,6 +21,18 @@ jobs:
           java-version: "21"
 
       - name: Extract mod project
+        shell: bash
+        run: |
+          mkdir project
+          ZIP_FILE=$(find . -maxdepth 1 -type f -iname '*.zip' -print -quit)
+          if [ -z "$ZIP_FILE" ]; then
+            echo "ZIP archive not found"
+            ls -la
+            exit 1
+          fi
+          echo "Found archive: $ZIP_FILE"
+          unzip "$ZIP_FILE" -d project
+          find project -maxdepth 3 -name build.gradle -print
         run: |
           mkdir project
           unzip sgushenka-forge-1.21.1-source.zip -d project
