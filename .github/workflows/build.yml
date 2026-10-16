@@ -23,7 +23,7 @@ jobs:
       - name: Extract mod project
         shell: bash
         run: |
-          mkdir project
+          mkdir -p project
           ZIP_FILE=$(find . -maxdepth 1 -type f -iname '*.zip' -print -quit)
           if [ -z "$ZIP_FILE" ]; then
             echo "ZIP archive not found"
